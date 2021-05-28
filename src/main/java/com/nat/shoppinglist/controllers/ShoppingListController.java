@@ -97,8 +97,6 @@ public class ShoppingListController {
 	@DeleteMapping("/list/{listId}")
 	public ShoppingListResponseModel deleteOneItemFromShoppingList(@PathVariable String listId, @RequestBody ModifyListItemRequestModel item ) {
 		ModelMapper modelMapper = new ModelMapper();
-		System.out.println(item.getItemId());
-		System.out.println(listId);
 		shoppingListService.deleteItemFromList(item.getItemId(), listId);
 		
 		ShoppingListDto shoppingList = shoppingListService.getShoppingListById(listId);

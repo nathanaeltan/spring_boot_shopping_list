@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nat.shoppinglist.dto.UserDto;
+import com.nat.shoppinglist.exceptions.UserServiceException;
 import com.nat.shoppinglist.models.entities.UserEntity;
 import com.nat.shoppinglist.repository.UserRepository;
 import com.nat.shoppinglist.service.services.UserService;
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto createUser(UserDto user) {
 
 		if (userRepository.findByEmail(user.getEmail()) != null)
-			throw new RuntimeException("Record Already exists");
+			throw new UserServiceException("Record Already exists");
 
 		ModelMapper modelMapper = new ModelMapper();
 		UserEntity userEntity = modelMapper.map(user, UserEntity.class);
